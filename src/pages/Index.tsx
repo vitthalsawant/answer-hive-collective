@@ -78,8 +78,8 @@ const Index = () => {
   return (
     <div className="min-h-screen py-20 px-4 bg-gradient-to-b from-background to-secondary/30">
       <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-2">
-          <h1 className="text-3xl font-bold text-[#8B5CF6] animate-pulse">
+        <div className="text-center mb-10">
+          <h1 className="text-5xl font-extrabold text-[#8B5CF6] animate-pulse tracking-tight">
             HyperTensia 2025
           </h1>
         </div>
