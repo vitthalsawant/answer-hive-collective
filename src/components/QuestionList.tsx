@@ -75,7 +75,7 @@ const QuestionList: React.FC<QuestionListProps> = ({ questions, isLoading = fals
             </CardHeader>
             <Separator />
             <CardContent className="pt-4">
-              <p className="text-md leading-relaxed">{question.question}</p>
+              <p className="text-md leading-relaxed font-bold">{question.question}</p>
             </CardContent>
           </Card>
         ))}
