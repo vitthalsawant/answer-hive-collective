@@ -27,7 +27,6 @@ const QuestionList: React.FC<QuestionListProps> = ({ questions }) => {
             key={question.id} 
             className="question-card overflow-hidden border-0 shadow-md"
             style={{ 
-              animationDelay: `${index * 100}ms`,
               opacity: 0,
               animation: 'fade-in 0.5s ease forwards, slide-up 0.5s ease forwards',
               animationDelay: `${index * 100}ms`
