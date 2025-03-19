@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
+import { supabase } from '@/integrations/supabase/client';
 
 export interface Question {
   id: string;
@@ -23,7 +24,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ onSubmit }) => {
   const [question, setQuestion] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!name.trim() || !question.trim()) {
@@ -35,16 +36,33 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ onSubmit }) => {
     
     setIsSubmitting(true);
     
-    setTimeout(() => {
+    try {
+      // Insert into Supabase
+      const { data, error } = await supabase
+        .from('questions')
+        .insert([{ name, question }])
+        .select();
+      
+      if (error) throw error;
+      
+      // Call the local onSubmit handler to update the UI
       onSubmit({ name, question });
+      
+      // Reset the form
       setName('');
       setQuestion('');
-      setIsSubmitting(false);
       
       toast('Question submitted', {
         description: 'Your question has been added successfully.',
       });
-    }, 600); // Add a small delay for animation purposes
+    } catch (error) {
+      console.error('Error submitting question:', error);
+      toast('Error submitting question', {
+        description: 'There was an error submitting your question. Please try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
