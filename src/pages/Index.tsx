@@ -25,7 +25,7 @@ const Index = () => {
           id: item.id,
           name: item.name,
           question: item.question,
-          timestamp: new Date(item.created_at),
+          timestamp: new Date(item.created_at || Date.now()),
         }));
         
         setQuestions(formattedQuestions);
@@ -50,7 +50,7 @@ const Index = () => {
           id: payload.new.id,
           name: payload.new.name,
           question: payload.new.question,
-          timestamp: new Date(payload.new.created_at),
+          timestamp: new Date(payload.new.created_at || Date.now()),
         };
         setQuestions((prev) => [newQuestion, ...prev]);
       })

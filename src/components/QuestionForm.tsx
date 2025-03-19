@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -40,8 +39,7 @@ const QuestionForm: React.FC<QuestionFormProps> = ({ onSubmit }) => {
       // Insert into Supabase
       const { data, error } = await supabase
         .from('questions')
-        .insert([{ name, question }])
-        .select();
+        .insert([{ name, question }]);
       
       if (error) throw error;
       
